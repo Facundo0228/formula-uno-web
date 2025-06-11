@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fórmula Uno</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #d40000;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 960px;
+      margin: auto;
+      padding: 1rem;
+    }
+    section {
+      background: white;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #d40000;
+    }
+    .equipo {
+      margin-bottom: 2rem;
+    }
+    .equipo h3 {
+      margin-top: 0;
+    }
+    .piloto {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .bandera {
+      width: 24px;
+      height: 16px;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    input[type="text"] {
+      padding: 0.5rem;
+      margin-top: 1rem;
+      width: 100%;
+      font-size: 1rem;
+    }
+    .chart-container {
+      position: relative;
+      height: 400px;
+      width: 100%;
+      margin-top: 2rem;
+    }
+    .foto-auto {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Fórmula Uno</h1>
+    <p>Descubre todo sobre los equipos y pilotos actuales de la F1</p>
+  </header>
+  <main>
+    <input type="text" id="buscador" placeholder="Busca un piloto (ej. Lewis Hamilton)..." oninput="buscarPiloto()" />
+
+    <section>
+      <h2>Pilotos, Equipos y Autos 2025</h2>
+
+      <div class="equipo">
+        <h3>McLaren</h3>
+        <img
+          class="foto-auto"
+          src="https://upload.wikimedia.org/wikipedia/commons/e/e6/McLaren_MCL60_launch_2023_front.jpg"
+          alt="McLaren MCL60 2025"
+        />
+        <div class="piloto" data-nombre="lando norris">
+          <p><img src="https://flagcdn.com/gb.svg" class="bandera" alt="GB" /> <strong>Lando Norris</strong> – 24 años</p>
+          <p><strong>Desde:</strong> 2019</p>
+        </div>
+        <div class="piloto" data-nombre="oscar piastri">
+          <p><img src="https://flagcdn.com/au.svg" class="bandera" alt="AU" /> <strong>Oscar Piastri</strong> – 23 años</p>
+          <p><strong>Desde:</strong> 2023</p>
+        </div>
+      </div>
+
+      <div class="equipo">
+        <h3>Red Bull</h3>
+        <img
+          class="foto-auto"
+          src="https://upload.wikimedia.org/wikipedia/commons/5/55/Red_Bull_RB19_-_2023_F1_Car.jpg"
+          alt="Red Bull RB19 2025"
+        />
+        <div class="piloto" data-nombre="max verstappen">
+          <p><img src="https://flagcdn.com/nl.svg" class="bandera" alt="NL" /> <strong>Max Verstappen</strong> – 27 años</p>
+          <p><strong>Desde:</strong> 2016</p>
+        </div>
+        <div class="piloto" data-nombre="sergio pérez">
+          <p><img src="https://flagcdn.com/mx.svg" class="bandera" alt="MX" /> <strong>Sergio Pérez</strong> – 34 años</p>
+          <p><strong>Desde:</strong> 2021</p>
+        </div>
+      </div>
+
+      <div class="equipo">
+        <h3>Ferrari</h3>
+        <img
+          class="foto-auto"
+          src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Ferrari_SF-23_-_2023_F1_Car.jpg"
+          alt="Ferrari SF-23 2025"
+        />
+        <div class="piloto" data-nombre="charles leclerc">
+          <p><img src="https://flagcdn.com/mc.svg" class="bandera" alt="MC" /> <strong>Charles Leclerc</strong> – 26 años</p>
+          <p><strong>Desde:</strong> 2018</p>
+        </div>
+        <div class="piloto" data-nombre="lewis hamilton">
+          <p><img src="https://flagcdn.com/gb.svg" class="bandera" alt="GB" /> <strong>Lewis Hamilton</strong> – 40 años</p>
+          <p><strong>Desde:</strong> 2025</p>
+        </div>
+      </div>
+
+      <div class="equipo">
+        <h3>Mercedes</h3>
+        <img
+          class="foto-auto"
+          src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Mercedes_W14_2023_F1_Car.jpg"
+          alt="Mercedes W14 2025"
+        />
+        <div class="piloto" data-nombre="george russell">
+          <p><img src="https://flagcdn.com/gb.svg" class="bandera" alt="GB" /> <strong>George Russell</strong> – 26 años</p>
+          <p><strong>Desde:</strong> 2022</p>
+        </div>
+        <div class="piloto" data-nombre="andrea kimi antonelli">
+          <p><img src="https://flagcdn.com/it.svg" class="bandera" alt="IT" /> <strong>Andrea Kimi Antonelli</strong> – 18 años</p>
+          <p><strong>Desde:</strong> 2025</p>
+        </div>
+      </div>
+
+      <div class="equipo">
+        <h3>Aston Martin</h3>
+        <img
+          class="foto-auto"
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Aston_Martin_AMR23_2023_F1_Car.jpg"
+          alt="Aston Martin AMR23 2025"
+        />
+        <div class="piloto" data-nombre="fernando alonso">
+          <p><img src="https://flagcdn.com/es.svg" class="bandera" alt="ES" /> <strong>Fernando Alonso</strong> – 43 años</p>
+          <p><strong>Desde:</strong> 2023</p>
+        </div>
+        <div class="piloto" data-nombre="lance stroll">
+          <p><img src="https://flagcdn.com/ca.svg" class="bandera" alt="CA" /> <strong>Lance Stroll</strong> – 25 años</p>
+          <p><strong>Desde:</strong> 2021</p>
+        </div>
+      </div>
+
+      <div class="equipo">
+        <h3>Alpine</h3>
+        <img
+          class="foto-auto"
+          src="https://upload.wikimedia.org/wikipedia/commons/1/17/Alpine_A523_2023_F1_Car.jpg"
+          alt="Alpine A523 2025"
+        />
+        <div class="piloto" data-nombre="esteban ocon">
+          <p><img src="https://flagcdn.com/fr.svg" class="bandera" alt="FR" /> <strong>Esteban Ocon</strong> – 27 años</p>
+          <p><strong>Desde:</strong> 2020</p>
+        </div>
+        <div class="piloto" data-nombre="pierre gasly">
+          <p><img src="https://flagcdn.com/fr.svg" class="bandera" alt="FR" /> <strong>Pierre Gasly</strong> – 28 años</p>
+          <p><strong>Desde:</strong> 2023</p>
+        </div>
+      </div>
+
+      <div class="equipo">
+        <h3>Williams</h3>
+        <img
+          class="foto-auto"
+          src="https://upload.wikimedia.org/wikipedia/commons/8/85/Williams_FW45_2023_F1_Car.jpg"
+          alt="Williams FW45 2025"
+        />
+        <div class="piloto" data-nombre="alexander albon">
+          <p><img src="https://flagcdn.com/th.svg" class="bandera" alt="TH" /> <strong>Alexander Albon</strong> – 27 años</p>
+          <p><strong>Desde:</strong> 2022</p>
+        </div>
+        <div class="piloto" data-nombre="logan sargeant">
+          <p><img src="https://flagcdn.com/us.svg" class="bandera" alt="US" /> <strong>Logan Sargeant</strong> – 22 años</p>
+          <p><strong>Desde:</strong> 2023</p>
+        </div>
+      </div>
+
+      <div class="equipo">
+        <h3>Haas</h3>
+        <img
+          class="foto-auto"
+          src="https://upload.wikimedia.org/wikipedia/commons/9/90/Haas_VF-23_2023_F1_Car.jpg"
+          alt="Haas VF-23 2025"
+        />
+        <div class="piloto" data-nombre="kevin magnussen">
+          <p><img src="https://flagcdn.com/dk.svg" class="bandera" alt="DK" /> <strong>Kevin Magnussen</strong> – 31 años</p>
+          <p><strong>Desde:</strong> 2022</p>
+        </div>
+        <div class="piloto" data-nombre="nico hülkenberg">
+          <p><img src="https://flagcdn.com/de.svg" class="bandera" alt="DE" /> <strong>Nico Hülkenberg</strong> – 36 años</p>
+          <p><strong>Desde:</strong> 2023</p>
+        </div>
+      </div>
+
+      <div class="equipo">
+        <h3>Sauber (Alfa Romeo)</h3>
+        <img
+          class="foto-auto"
+          src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Alfa_Romeo_C43_2023_F1_Car.jpg"
+          alt="Alfa Romeo C43 2025"
+        />
+        <div class="piloto" data-nombre="valterri bottas">
+          <p><img src="https://flagcdn.com/fi.svg" class="bandera" alt="FI" /> <strong>Valtteri Bottas</strong> – 33 años</p>
+          <p><strong>Desde:</strong> 2022</p>
+        </div>
+        <div class="piloto" data-nombre="zhou guanyu">
+          <p><img src="https://flagcdn.com/cn.svg" class="bandera" alt="CN" /> <strong>Zhou Guanyu</strong> – 25 años</p>
+          <p><strong>Desde:</strong> 2022</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Campeonato de Pilotos 2025</h2>
+      <div class="chart-container">
+        <canvas id="chartPilotos"></canvas>
+      </div>
+    </section>
+
+    <section>
+      <h2>Campeonato de Constructores 2025</h2>
+      <div class="chart-container">
+        <canvas id="chartEquipos"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function buscarPiloto() {
+      const filtro = document.getElementById("buscador").value.toLowerCase();
+      const pilotos = document.querySelectorAll(".piloto");
+      pilotos.forEach((piloto) => {
+        const nombre = piloto.getAttribute("data-nombre");
+        piloto.style.display = nombre.includes(filtro) ? "block" : "none";
+      });
+    }
+
+    const ctxPilotos = document.getElementById("chartPilotos").getContext("2d");
+    new Chart(ctxPilotos, {
+      type: "bar",
+      data: {
+        labels: ["Lando Norris", "Oscar Piastri", "Max Verstappen", "Charles Leclerc", "Lewis Hamilton"],
+        datasets: [
+          {
+            label: "Puntos",
+            data: [150, 140, 125, 110, 95],
+            backgroundColor: "#d40000",
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true },
+        },
+      },
+    });
+
+    const ctxEquipos = document.getElementById("chartEquipos").getContext("2d");
+    new Chart(ctxEquipos, {
+      type: "bar",
+      data: {
+        labels: ["McLaren", "Red Bull", "Ferrari", "Mercedes", "Aston Martin"],
+        datasets: [
+          {
+            label: "Puntos",
+            data: [290, 250, 205, 180, 120],
+            backgroundColor: "#3333aa",
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true },
+        },
+      },
+    });
+  </script>
+</body>
+</html>
